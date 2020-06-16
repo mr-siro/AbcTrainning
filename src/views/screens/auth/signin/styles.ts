@@ -1,16 +1,13 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#5031EC',
     flex: 1,
-    alignItems: 'center',
-    paddingVertical: 12,
   },
   image: {
     width: 100,
     height: 100,
-    marginTop: 54,
     resizeMode: 'contain',
   },
   contentContainer: {
@@ -18,7 +15,6 @@ const styles = StyleSheet.create({
     width: 340,
     borderRadius: 13,
     alignItems: 'center',
-    marginTop: 71,
     paddingVertical: 30,
   },
   textSignIn: {
@@ -56,7 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.5)',
     height: 14,
     flexDirection: 'column',
-    width: 314,
+    width: 300,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
   },
@@ -64,7 +60,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 24,
+    paddingTop: '15%',
   },
   signUpText: {
     textDecorationLine: 'underline',

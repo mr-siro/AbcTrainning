@@ -19,7 +19,7 @@ import {SignUp} from 'src/views/screens/auth/signup';
 function App() {
   return (
     <SafeAreaProvider>
-      <SignUp />
+      <SignIn />
     </SafeAreaProvider>
   );
 }
