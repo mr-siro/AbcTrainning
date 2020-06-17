@@ -12,6 +12,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 
 import {Images} from 'src/assets';
@@ -37,10 +38,13 @@ export const SignUp = () => {
             alignItems: 'center',
             paddingVertical: 14,
           }}>
-          <View style={{paddingTop: '30%'}}>
+          <View style={{paddingTop: Dimensions.get('window').width / 3}}>
             <Image source={Images.LoGo.SignLogo} style={styles.image} />
           </View>
-          <View style={{paddingVertical: '20%'}}>
+          <View
+            style={{
+              paddingVertical: (Dimensions.get('window').width / 2) * 0.3,
+            }}>
             <View style={styles.contentContainer}>
               <Text style={styles.textSignIn}>SIGN UP</Text>
               <View style={styles.inputContainer}>
@@ -117,7 +121,8 @@ export const SignUp = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <View>
+          <View
+            style={{paddingTop: (Dimensions.get('window').width / 2) * 0.2}}>
             <Text style={styles.dontAccText} onPress={() => {}}>
               {'Back to Sign in'}
             </Text>

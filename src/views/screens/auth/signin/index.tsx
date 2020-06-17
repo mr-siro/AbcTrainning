@@ -12,6 +12,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 
 import {Images} from 'src/assets';
@@ -33,10 +34,14 @@ export const SignIn = () => {
             alignItems: 'center',
             paddingVertical: 14,
           }}>
-          <View style={{paddingTop: '30%'}}>
+          <View style={{paddingTop: Dimensions.get('window').width / 3}}>
             <Image source={Images.LoGo.SignLogo} style={styles.image} />
           </View>
-          <View style={{paddingVertical: '20%', alignItems: 'center'}}>
+          <View
+            style={{
+              paddingVertical: (Dimensions.get('window').width / 2) * 0.3,
+              alignItems: 'center',
+            }}>
             <View style={styles.contentContainer}>
               <Text style={styles.textSignIn}>SIGN IN</Text>
               <View style={styles.inputContainer}>
