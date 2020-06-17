@@ -13,13 +13,12 @@ import {
   StyleSheet,
 } from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {SignIn} from 'src/views/screens/auth/signin';
-import {SignUp} from 'src/views/screens/auth/signup';
+import {SignIn, SignUp, ProfileScreen} from '@screens';
 
 function App() {
   return (
     <SafeAreaProvider>
-      <SignUp />
+      <ProfileScreen />
     </SafeAreaProvider>
   );
 }

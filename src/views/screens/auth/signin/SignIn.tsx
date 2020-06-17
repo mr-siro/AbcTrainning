@@ -15,7 +15,7 @@ import {
   Dimensions,
 } from 'react-native';
 
-import {Images} from 'src/assets';
+import {Images} from '@assets';
 import {styles} from './styles';
 
 export const SignIn = () => {

@@ -1,8 +1,9 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import {Theme} from '@shared';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#5031EC',
+    backgroundColor: Theme.color.AppColor.backgroundPrimary,
     flex: 1,
   },
   image: {
@@ -11,7 +12,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   contentContainer: {
-    backgroundColor: '#ffffff',
+    backgroundColor: Theme.color.AppColor.backgroundAcient,
     width: 340,
     borderRadius: 13,
     alignItems: 'center',
@@ -20,10 +21,10 @@ const styles = StyleSheet.create({
   textSignIn: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#4830C9',
+    color: Theme.color.ButtonBackground,
   },
   buttonSubmit: {
-    backgroundColor: '#4830C9',
+    backgroundColor: Theme.color.ButtonBackground,
     width: 171,
     height: 45,
     borderRadius: 100,
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
   },
   input: {
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: Theme.color.AppColor.backgroundAcient,
     width: '80%',
   },
   textForgotYourPassword: {fontSize: 16, color: '#8A8A8A', fontWeight: '600'},
@@ -64,13 +65,13 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     textDecorationLine: 'underline',
-    color: '#FFFFFF',
+    color: Theme.color.AppColor.backgroundAcient,
     fontSize: 16,
     fontWeight: '600',
     paddingHorizontal: 12,
   },
   dontAccText: {
-    color: '#FFFFFF',
+    color: Theme.color.AppColor.backgroundAcient,
     fontSize: 16,
     fontWeight: '600',
   },
