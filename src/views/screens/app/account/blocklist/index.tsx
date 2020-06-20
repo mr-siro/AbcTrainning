@@ -10,79 +10,28 @@ import {
 } from 'react-native';
 import {Header} from 'react-native-elements';
 import {Theme, Size} from 'src/shared';
+import {listUser} from 'src/services/data';
 
 import {Swipeable} from 'react-native-gesture-handler';
 
 export const BlockList = () => {
-  const [block, setBlock] = useState(true);
-
-  const data = [
-    {
-      id: 1,
-      avt: 'https://loremflickr.com/320/240',
-      name: 'Tova Fennick',
-      xp: '5/10',
-    },
-    {
-      id: 2,
-      avt: 'https://loremflickr.com/320/240',
-      name: 'Robinette Readman',
-      xp: '4/10',
-    },
-    {
-      id: 3,
-      avt: 'https://loremflickr.com/320/240',
-      name: 'Winny Croxton',
-      xp: '9/10',
-    },
-    {
-      id: 4,
-      avt: 'https://loremflickr.com/320/240',
-      name: 'Shara Samudio',
-      xp: '10/10',
-    },
-    {
-      id: 5,
-      avt: 'https://loremflickr.com/320/240',
-      name: 'Jane Wittering',
-      xp: '1/10',
-    },
-    {
-      id: 6,
-      avt: 'https://loremflickr.com/320/240',
-      name: 'Haywood Merck',
-      xp: '3/10',
-    },
-    {
-      id: 7,
-      avt: 'https://loremflickr.com/320/240',
-      name: 'Elli Feirn',
-      xp: '8/10',
-    },
-    {
-      id: 8,
-      avt: 'https://loremflickr.com/320/240',
-      name: 'Wylma Caze',
-      xp: '3/10',
-    },
-    {
-      id: 9,
-      avt: 'https://loremflickr.com/320/240',
-      name: 'Fabio Carles',
-      xp: '6/10',
-    },
-    {
-      id: 10,
-      avt: 'https://loremflickr.com/320/240',
-      name: 'Wilfred Ferrillo',
-      xp: '7/10',
-    },
-  ];
-
-  const [blockList, setBlockList] = useState([1, 3, 5, 7, 9]);
-  const onAlert = () =>
+  const [blockIds, setBlockIds] = useState([] as number[]);
+  const idIsBlock = (id: number) => {
+    if (blockIds.includes(id)) return true;
+    return false;
+  };
+  const blockById = (id: number) => {
+    if (!blockIds.includes(id)) setBlockIds(blockIds.concat(id));
+  };
+  const unBlockById = (id: number) => {
+    const indexOf = blockIds.indexOf(id);
+    if (indexOf !== -1) {
+      blockIds.splice(indexOf, 1);
+    }
+  };
+  const showConfirmPopup = (isBlock: boolean, id: number) => {
     Alert.alert(
-      block ? 'Bạn muốn bỏ chặn người này?' : 'Chặn người này?',
+      isBlock ? 'Bạn muốn bỏ chặn người này?' : 'Chặn người này?',
       'Cần 24 giờ để hoàn tác',
       [
         {
@@ -90,26 +39,27 @@ export const BlockList = () => {
           onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
-        {text: 'OK', onPress: () => handlerBlock()},
+        {
+          text: 'OK',
+          onPress: () => (isBlock ? unBlockById(id) : blockById(id)),
+        },
       ],
       {cancelable: false},
     );
-  const handlerBlock = () => {
-    setBlock(!block);
   };
-  const leftAction = () => (
+  const renderLeftAction = (isBlock: boolean, id: number) => (
     <TouchableOpacity
-      onPress={onAlert}
+      onPress={() => showConfirmPopup(isBlock, id)}
       style={{
         justifyContent: 'center',
-        backgroundColor: block ? '#68CF30' : 'red',
+        backgroundColor: isBlock ? '#68CF30' : 'red',
       }}>
       <Text
         style={{
           color: Theme.color.AppColor.backgroundAcient,
           paddingHorizontal: Size.spacing.extraLarge,
         }}>
-        {block ? 'Unblock' : 'Block'}
+        {isBlock ? 'Unblock' : 'Block'}
       </Text>
     </TouchableOpacity>
   );
@@ -137,11 +87,13 @@ export const BlockList = () => {
       />
       <View style={{paddingVertical: Size.spacing.extraLarge}}>
         <FlatList
-          data={data}
+          data={listUser}
           keyExtractor={(item) => item.id}
           renderItem={({item, index}) => (
             <Swipeable
-              renderLeftActions={leftAction}
+              renderLeftActions={() =>
+                renderLeftAction(idIsBlock(item.id), item.id)
+              }
               onSwipeableLeftOpen={() => console.log('openning')}>
               <View
                 style={{

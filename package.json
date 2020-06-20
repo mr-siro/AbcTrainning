@@ -61,6 +61,9 @@
       "\\.snap$",
       "<rootDir>/node_modules/"
     ],
-    "cacheDirectory": ".jest/cache"
+    "cacheDirectory": ".jest/cache",
+    "setupFiles": [
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
+    ]
   }
 }

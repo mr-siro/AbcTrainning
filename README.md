@@ -44,3 +44,11 @@ open myProject.xcworkspace and click run
 
 open android studio => open existing project => select android folder in project
 open AVD manager then create virtual devices => click run in project
+
+# clean build ios
+
+rm -rf /ios/build and rm -rf ~/Library/Developer/Xcode/DerivedData
+
+# clean build android
+
+cd android => ./gradlew clean
