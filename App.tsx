@@ -17,12 +17,13 @@ import {SignIn} from 'src/views/screens/auth/signin';
 import {SignUp} from 'src/views/screens/auth/signup';
 import {ProfileScreen} from 'src/views/screens/app/account/profile';
 import {BlockList} from 'src/views/screens/app/account/blocklist';
+import {YouTubeScreen} from 'src/views/screens/app/childElement/youtube';
 
 function App() {
   return (
-    <SafeAreaProvider>
-      <BlockList />
-    </SafeAreaProvider>
+    <SafeAreaView>
+      <YouTubeScreen />
+    </SafeAreaView>
   );
 }
 
