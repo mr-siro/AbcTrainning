@@ -11,10 +11,10 @@ import {
   ScrollView,
 } from 'react-native';
 
-import {ModalOverlay} from 'src/views/components';
-import {Theme, Size} from 'src/shared';
+import {ModalOverlay} from '@components';
+import {Colors, Size} from '@themes';
 import {Header} from 'react-native-elements';
-import {Images} from 'src/assets';
+import {Images} from '@assets';
 import {styles} from './styles';
 
 export const ProfileScreen = () => {
@@ -41,21 +41,21 @@ export const ProfileScreen = () => {
       <Header
         leftComponent={{
           icon: 'arrow-back',
-          color: Theme.color.AppColor.backgroundAcient,
+          color: Colors.AppColor.backgroundAcient,
         }}
         centerComponent={{
           text: 'Add Guardian',
           style: {
-            color: Theme.color.AppColor.backgroundAcient,
+            color: Colors.AppColor.backgroundAcient,
             fontSize: 18,
             fontWeight: 'bold',
           },
         }}
         rightComponent={{
           icon: 'close',
-          color: Theme.color.AppColor.backgroundAcient,
+          color: Colors.AppColor.backgroundAcient,
         }}
-        backgroundColor={Theme.color.AppColor.backgroundPrimary}
+        backgroundColor={Colors.AppColor.backgroundPrimary}
       />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView style={{flex: 1}}>
@@ -84,7 +84,7 @@ export const ProfileScreen = () => {
                   onChangeText={(value) => setName(value)}
                   placeholder={'Thanos'}
                   style={styles.name}
-                  placeholderTextColor={Theme.color.textColor.titleColor}
+                  placeholderTextColor={Colors.textColor.titleColor}
                   onSubmitEditing={() => phoneRef.current?.focus()}
                 />
               </View>
@@ -98,7 +98,7 @@ export const ProfileScreen = () => {
                   keyboardType={'numeric'}
                   placeholder={'Phone Number'}
                   style={styles.childProfile}
-                  placeholderTextColor={Theme.color.textColor.noteColor}
+                  placeholderTextColor={Colors.textColor.noteColor}
                   onSubmitEditing={() => relaRef.current?.focus()}
                 />
               </View>
@@ -111,7 +111,7 @@ export const ProfileScreen = () => {
                   onChangeText={(value) => setRela(value)}
                   placeholder={'Type Of Relation'}
                   style={styles.childProfile}
-                  placeholderTextColor={Theme.color.textColor.noteColor}
+                  placeholderTextColor={Colors.textColor.noteColor}
                   onSubmitEditing={() => timerRef.current?.focus()}
                 />
               </View>
@@ -125,7 +125,7 @@ export const ProfileScreen = () => {
                   placeholder={'Inactivy Timer'}
                   keyboardType={'numeric'}
                   style={styles.childProfile}
-                  placeholderTextColor={Theme.color.textColor.noteColor}
+                  placeholderTextColor={Colors.textColor.noteColor}
                   onSubmitEditing={() => dayRef.current?.focus()}
                 />
               </View>
@@ -139,11 +139,11 @@ export const ProfileScreen = () => {
                       value={day}
                       onChangeText={(value) => setDay(value)}
                       placeholder={'02'}
-                      placeholderTextColor={Theme.color.textColor.popupColor}
+                      placeholderTextColor={Colors.textColor.popupColor}
                       keyboardType={'numeric'}
                       onSubmitEditing={() => hourRef.current?.focus()}
                       style={{
-                        color: Theme.color.textColor.popupColor,
+                        color: Colors.textColor.popupColor,
                       }}
                     />
                   </View>
@@ -158,10 +158,10 @@ export const ProfileScreen = () => {
                       onChangeText={(value) => setHour(value)}
                       placeholder={'15'}
                       keyboardType={'numeric'}
-                      placeholderTextColor={Theme.color.textColor.popupColor}
+                      placeholderTextColor={Colors.textColor.popupColor}
                       onSubmitEditing={() => Keyboard.dismiss()}
                       style={{
-                        color: Theme.color.textColor.popupColor,
+                        color: Colors.textColor.popupColor,
                       }}
                     />
                   </View>

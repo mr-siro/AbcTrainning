@@ -1,2 +1,3 @@
-import ModalOverlay from './modal';
+import ModalOverlay from './modal/ModalOverlay';
+
 export {ModalOverlay};

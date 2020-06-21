@@ -9,8 +9,8 @@ import {
   Alert,
 } from 'react-native';
 import {Header} from 'react-native-elements';
-import {Theme, Size} from 'src/shared';
-import {listUser} from 'src/services/data';
+import {Colors, Size} from '@themes';
+import {listUser} from '@services';
 
 import {Swipeable} from 'react-native-gesture-handler';
 
@@ -56,7 +56,7 @@ export const BlockList = () => {
       }}>
       <Text
         style={{
-          color: Theme.color.AppColor.backgroundAcient,
+          color: Colors.AppColor.backgroundAcient,
           paddingHorizontal: Size.spacing.extraLarge,
         }}>
         {isBlock ? 'Unblock' : 'Block'}
@@ -68,22 +68,22 @@ export const BlockList = () => {
       <Header
         leftComponent={{
           icon: 'arrow-back',
-          color: Theme.color.AppColor.backgroundAcient,
+          color: Colors.AppColor.backgroundAcient,
         }}
         centerComponent={{
           text: 'Blocked List',
           style: {
-            color: Theme.color.AppColor.backgroundAcient,
+            color: Colors.AppColor.backgroundAcient,
             fontSize: 18,
             fontWeight: 'bold',
           },
         }}
         rightComponent={{
           icon: 'ios-add-circle-outline',
-          color: Theme.color.AppColor.backgroundAcient,
+          color: Colors.AppColor.backgroundAcient,
           type: 'ionicon',
         }}
-        backgroundColor={Theme.color.AppColor.backgroundPrimary}
+        backgroundColor={Colors.AppColor.backgroundPrimary}
       />
       <View style={{paddingVertical: Size.spacing.extraLarge}}>
         <FlatList

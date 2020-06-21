@@ -1,5 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
-import {Theme, Size} from 'src/shared';
+import {Colors, Size} from '@themes';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     borderRadius: 150,
     width: 108,
     height: 108,
-    backgroundColor: Theme.color.AppColor.backgroundAcient,
+    backgroundColor: Colors.AppColor.backgroundAcient,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     width: 43,
     height: 29,
     borderRadius: 5,
-    borderColor: Theme.color.textColor.popupColor,
+    borderColor: Colors.textColor.popupColor,
     borderWidth: 1.5,
     justifyContent: 'center',
     alignItems: 'center',
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   labelStyle: {
     fontSize: Size.FontSize.large,
     paddingHorizontal: Size.spacing.medium,
-    color: Theme.color.textColor.titleColor,
+    color: Colors.textColor.titleColor,
   },
   box1: {flexDirection: 'row', alignItems: 'center'},
   box2: {
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     marginLeft: Size.spacing.large,
   },
   btnContainer: {
-    backgroundColor: Theme.color.ButtonBackground,
+    backgroundColor: Colors.ButtonBackground,
     width: 197,
     height: 50,
     alignItems: 'center',
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   btn: {
-    color: Theme.color.AppColor.backgroundAcient,
+    color: Colors.AppColor.backgroundAcient,
     fontSize: Size.FontSize.large,
     fontWeight: '600',
   },

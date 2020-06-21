@@ -1,27 +1,42 @@
 import {StyleSheet, Dimensions} from 'react-native';
-import {Size, Theme} from 'src/shared';
+import {Size, Colors} from '@themes';
 
 const styles = StyleSheet.create({
-  videoContainer: {
-    maxWidth: '100%',
-    height: (Dimensions.get('window').width * 9) / 16,
-    backgroundColor: 'red',
-  },
-  listContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: Size.spacing.medium,
-    paddingVertical: Size.spacing.medium,
-  },
-  imageStyle: {width: 60, height: 60, borderRadius: 150},
-  rightContent: {
-    marginHorizontal: Size.spacing.large,
+  container: {
     flex: 1,
   },
-  titleStyle: {
-    fontSize: Size.FontSize.large,
-    fontWeight: '600',
+  video: {
+    width: Dimensions.get('window').width,
+    height: (Dimensions.get('window').width * 9) / 16,
+    backgroundColor: Colors.Border,
   },
-  description: {color: '#6B6B6B', marginTop: 5, fontSize: Size.FontSize.medium},
+  list: {},
+  itemContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 14,
+    paddingVertical: 20,
+  },
+  itemImage: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    alignSelf: 'center',
+  },
+  textContainer: {
+    flex: 1,
+    marginLeft: 16,
+  },
+  name: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: Colors.Black,
+    lineHeight: 24,
+  },
+  description: {
+    marginTop: 6,
+    fontSize: 14,
+    color: Colors.TextPrimary,
+    lineHeight: 20,
+  },
 });
 export {styles};

@@ -13,17 +13,14 @@ import {
   StyleSheet,
 } from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {SignIn} from 'src/views/screens/auth/signin';
-import {SignUp} from 'src/views/screens/auth/signup';
-import {ProfileScreen} from 'src/views/screens/app/account/profile';
-import {BlockList} from 'src/views/screens/app/account/blocklist';
-import {YouTubeScreen} from 'src/views/screens/app/childElement/youtube';
+
+import {YouTubeScreen, ProfileScreen, SignIn, SignUp} from '@screens';
 
 function App() {
   return (
-    <SafeAreaView>
+    <SafeAreaProvider>
       <YouTubeScreen />
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
