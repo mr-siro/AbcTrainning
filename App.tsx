@@ -14,7 +14,13 @@ import {
 } from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-import {YouTubeScreen, ProfileScreen, SignIn, SignUp} from '@screens';
+import {
+  YouTubeScreen,
+  ProfileScreen,
+  SignIn,
+  SignUp,
+  BlockList,
+} from '@screens';
 
 function App() {
   return (
