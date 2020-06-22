@@ -6,6 +6,7 @@ import axios from 'axios';
 import {Colors} from '@themes';
 import {Header} from 'react-native-elements';
 import {Images} from '@assets';
+import {ItemComponent} from '@components';
 
 export interface Video {
   description: string;
@@ -15,7 +16,7 @@ export interface Video {
   name: string;
 }
 
-export const YouTubeScreen: React.FunctionComponent = () => {
+export const YouTubeScreen: React.FunctionComponent = React.memo(() => {
   const [videos, setVideos] = useState([]);
   const [videoId, setVideoId] = useState('');
 
@@ -40,27 +41,14 @@ export const YouTubeScreen: React.FunctionComponent = () => {
 
   const renderVideoItem = (item: Video, index: number) => {
     return (
-      <TouchableOpacity
-        style={[
-          styles.itemContainer,
-          {backgroundColor: index % 2 ? Colors.Border : Colors.White},
-        ]}
-        onPress={() => setVideoId(item.embeddedUrl)}>
-        <Image
-          source={{uri: item.imageUrl}}
-          style={[
-            styles.itemImage,
-            {
-              borderWidth: item.embeddedUrl === videoId ? 5 : 0,
-              borderColor: Colors.Blue,
-            },
-          ]}
-        />
-        <View style={styles.textContainer}>
-          <Text style={styles.name}>{item.name}</Text>
-          <Text style={styles.description}>{item.description}</Text>
-        </View>
-      </TouchableOpacity>
+      <ItemComponent
+        image={item.imageUrl}
+        title={item.name}
+        description={item.description}
+        isActive={item.embeddedUrl === videoId}
+        isHightLight={index % 2 === 0}
+        onClick={() => setVideoId(item.embeddedUrl)}
+      />
     );
   };
 
@@ -80,4 +68,4 @@ export const YouTubeScreen: React.FunctionComponent = () => {
       />
     </View>
   );
-};
+});
