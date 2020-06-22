@@ -25,7 +25,7 @@ import {
 function App() {
   return (
     <SafeAreaProvider>
-      <YouTubeScreen />
+      <BlockList />
     </SafeAreaProvider>
   );
 }

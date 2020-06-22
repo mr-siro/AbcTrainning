@@ -45,7 +45,8 @@
     "metro-react-native-babel-preset": "^0.59.0",
     "react-native-debugger-open": "^0.3.24",
     "react-test-renderer": "16.11.0",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.5",
+    "@types/yup": "^0.29.3"
   },
   "jest": {
     "preset": "react-native",

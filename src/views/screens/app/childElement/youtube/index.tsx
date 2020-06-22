@@ -18,9 +18,11 @@ export interface Video {
 export const YouTubeScreen: React.FunctionComponent = () => {
   const [videos, setVideos] = useState([]);
   const [videoId, setVideoId] = useState('');
+
   useEffect(() => {
     getData();
   }, []);
+
   const getData = () => {
     axios({
       method: 'get',
@@ -31,9 +33,11 @@ export const YouTubeScreen: React.FunctionComponent = () => {
       })
       .catch((error: any) => console.error(error));
   };
+
   const getYoutubeId = (embeddedUrl: string) => {
     return embeddedUrl ? embeddedUrl.split('?v=')[1] : embeddedUrl;
   };
+
   const renderVideoItem = (item: Video, index: number) => {
     return (
       <TouchableOpacity
@@ -59,6 +63,7 @@ export const YouTubeScreen: React.FunctionComponent = () => {
       </TouchableOpacity>
     );
   };
+
   return (
     <View>
       <Header

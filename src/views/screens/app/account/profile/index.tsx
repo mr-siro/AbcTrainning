@@ -9,9 +9,9 @@ import {
   TouchableOpacity,
   Dimensions,
   ScrollView,
+  Alert,
 } from 'react-native';
 
-import {ModalOverlay} from '@components';
 import {Colors, Size} from '@themes';
 import {Header} from 'react-native-elements';
 import {Images} from '@assets';
@@ -31,9 +31,28 @@ export const ProfileScreen = () => {
   const dayRef = createRef<TextInput>();
   const hourRef = createRef<TextInput>();
 
-  let modalPicker = React.createRef<ModalOverlay>();
-  const onOpenModal = () => {
-    modalPicker.current?.open();
+  const onValid = () => {
+    if (
+      name === '' ||
+      phone === '' ||
+      rela === '' ||
+      timer === '' ||
+      day === '' ||
+      hour === ''
+    ) {
+      Alert.alert('', 'Bạn chưa nhập đúng thông tin.');
+    } else if (
+      name.length < 3 ||
+      phone.length < 3 ||
+      rela.length < 3 ||
+      timer.length < 2 ||
+      day.length < 2 ||
+      hour.length < 2
+    ) {
+      Alert.alert('', 'Nội dung quá ngắn.');
+    } else {
+      Alert.alert('', 'Success!');
+    }
   };
 
   return (
@@ -175,15 +194,10 @@ export const ProfileScreen = () => {
               }}>
               <TouchableOpacity
                 style={styles.btnContainer}
-                onPress={onOpenModal}>
+                onPress={() => onValid()}>
                 <Text style={styles.btn}>Add A Guardian</Text>
               </TouchableOpacity>
             </View>
-            <ModalOverlay position={'center'} ref={modalPicker}>
-              <View>
-                <Text>Thanos</Text>
-              </View>
-            </ModalOverlay>
           </View>
         </ScrollView>
       </TouchableWithoutFeedback>
