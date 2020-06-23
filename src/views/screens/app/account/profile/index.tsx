@@ -31,30 +31,60 @@ export const ProfileScreen = () => {
   const dayRef = createRef<TextInput>();
   const hourRef = createRef<TextInput>();
 
-  const onValid = () => {
-    if (
-      name === '' ||
-      phone === '' ||
-      rela === '' ||
-      timer === '' ||
-      day === '' ||
-      hour === ''
-    ) {
-      Alert.alert('', 'Bạn chưa nhập đúng thông tin.');
-    } else if (
-      name.length < 3 ||
-      phone.length < 3 ||
-      rela.length < 3 ||
-      timer.length < 2 ||
-      day.length < 2 ||
-      hour.length < 2
-    ) {
-      Alert.alert('', 'Nội dung quá ngắn.');
+  // const onValid = () => {
+  //   if (
+  //     name === '' ||
+  //     phone === '' ||
+  //     rela === '' ||
+  //     timer === '' ||
+  //     day === '' ||
+  //     hour === ''
+  //   ) {
+  //     Alert.alert('', 'Bạn chưa nhập đúng thông tin.');
+  //   } else if (
+  //     name.length < 3 ||
+  //     phone.length < 3 ||
+  //     rela.length < 3 ||
+  //     timer.length < 2 ||
+  //     day.length < 2 ||
+  //     hour.length < 2
+  //   ) {
+  //     Alert.alert('', 'Nội dung quá ngắn.');
+  //   } else {
+  //     Alert.alert('', 'Success!');
+  //   }
+  // };
+
+  const valiDate = () => {
+    if (name == '' || name.length < 3) {
+      Alert.alert('', 'Tên chưa đúng');
+      return false;
+    }
+
+    if (phone == '' || phone.length < 2) {
+      Alert.alert('', 'Phone chưa đúng');
+      return false;
+    }
+    if (rela == '') {
+      Alert.alert('', 'Tình trạng chưa đúng');
+      return false;
+    }
+    if (timer == '' || name.length < 2) {
+      Alert.alert('', 'Ngày chưa đúng');
+      return false;
+    }
+    if (day == '' || day.length < 2) {
+      Alert.alert('', 'Ngày chưa đúng');
+      return false;
+    }
+    if (hour == '' || hour.length < 2) {
+      Alert.alert('', 'Giờ chưa đúng');
+      return false;
     } else {
       Alert.alert('', 'Success!');
     }
+    return true;
   };
-
   return (
     <View style={{flex: 1}}>
       <Header
@@ -194,7 +224,7 @@ export const ProfileScreen = () => {
               }}>
               <TouchableOpacity
                 style={styles.btnContainer}
-                onPress={() => onValid()}>
+                onPress={() => valiDate()}>
                 <Text style={styles.btn}>Add A Guardian</Text>
               </TouchableOpacity>
             </View>

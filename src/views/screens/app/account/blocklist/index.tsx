@@ -1,20 +1,13 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  FlatList,
-  Image,
-  Alert,
-} from 'react-native';
-import {Header} from 'react-native-elements';
+import {View, Text, TouchableOpacity, FlatList, Alert} from 'react-native';
+
 import {Colors, Size} from '@themes';
 import {listUser} from '@services';
-import {ListItem} from './ListItem';
 
+import {ItemComponent, ModalOverlay} from '@components';
+import {HeaderBlockList} from './components/Header';
 import {Swipeable} from 'react-native-gesture-handler';
-
+import {Input, Button} from 'react-native-elements';
 export interface User {
   id: number;
   name: string;
@@ -23,29 +16,23 @@ export interface User {
 }
 
 export const BlockList = React.memo(() => {
-  const [blockIds, setBlockIds] = useState([] as number[]);
+  const [listBlock, setListBlock] = useState(listUser);
+  const [nameValue, setNameValue] = useState('');
+  const [desValue, setDesValue] = useState('');
+  const [avtValue, setAvtValue] = useState('');
+  let modalDetail = React.createRef<ModalOverlay>();
+  let modalAddUser = React.createRef<ModalOverlay>();
 
-  const idIsBlock = (id: number) => {
-    if (blockIds.includes(id)) return true;
-    return false;
+  //xoa item khoi list
+  const unlockItemById = (id: number) => {
+    const filteredData = listBlock.filter((item) => item.id !== id);
+    setListBlock(filteredData);
+    console.log(filteredData);
   };
 
-  const blockById = (id: number) => {
-    if (!blockIds.includes(id)) setBlockIds(blockIds.concat(id));
-    console.log('block', id);
-  };
-
-  const unBlockById = (id: number) => {
-    const indexOf = blockIds.indexOf(id);
-    if (indexOf !== -1) {
-      setBlockIds(blockIds.splice(indexOf, 1));
-      console.log('unblock', id);
-    }
-  };
-
-  const showConfirmPopup = (isBlock: boolean, id: number) => {
+  const showConfirmPopup = (id: number) => {
     Alert.alert(
-      isBlock ? 'Bạn muốn bỏ chặn người này?' : 'Chặn người này?',
+      'Bạn muốn bỏ chặn người này?',
       'Cần 24 giờ để hoàn tác',
       [
         {
@@ -55,28 +42,48 @@ export const BlockList = React.memo(() => {
         },
         {
           text: 'OK',
-          onPress: () => (isBlock ? unBlockById(id) : blockById(id)),
+          onPress: () => unlockItemById(id),
         },
       ],
       {cancelable: false},
     );
   };
+  //hien thi va sua item
+  const EditUserForm = (id: number) => {
+    const filteredData = listBlock.find((item) => item.id == id);
+    const nameValue = filteredData?.name ?? '';
+    const deValue = filteredData?.xp ?? '';
+    const avtValue = filteredData?.avt ?? '';
+    setNameValue(nameValue);
+    setDesValue(deValue);
+    setAvtValue(avtValue);
 
-  const renderLeftAction = (isBlock: boolean, id: number) => (
+    modalDetail.current?.open();
+  };
+  const closeForm = () => {
+    modalDetail.current?.close();
+  };
+  const addUserForm = () => {
+    modalAddUser.current?.open();
+  };
+  const closeAddForm = () => {
+    modalAddUser.current?.close();
+  };
+  const renderLeftAction = (id: number) => (
     <TouchableOpacity
-      onPress={() => showConfirmPopup(isBlock, id)}
+      onPress={() => showConfirmPopup(id)}
       style={{
         justifyContent: 'center',
-        backgroundColor: isBlock ? '#68CF30' : 'red',
+        backgroundColor: '#68CF30',
         borderColor: '#8E8E8E',
         borderWidth: 0.5,
       }}>
       <Text
         style={{
           color: Colors.AppColor.backgroundAcient,
-          paddingHorizontal: isBlock ? 19 : Size.spacing.huge,
+          paddingHorizontal: Size.spacing.huge,
         }}>
-        {isBlock ? 'Unblock' : 'Block'}
+        {'Unblock'}
       </Text>
     </TouchableOpacity>
   );
@@ -85,43 +92,89 @@ export const BlockList = React.memo(() => {
     return (
       <View>
         <Swipeable
-          renderLeftActions={() =>
-            renderLeftAction(idIsBlock(item.id), item.id)
-          }
+          renderLeftActions={() => renderLeftAction(item.id)}
           onSwipeableLeftOpen={() => {}}>
-          <ListItem item={item} />
+          <ItemComponent
+            image={item.avt}
+            title={item.name}
+            description={`XP: ${item.xp}`}
+            onClick={() => EditUserForm(item.id)}
+          />
         </Swipeable>
+        <ModalOverlay position={'center'} ref={modalDetail}>
+          <View>
+            <Input
+              label={'Name'}
+              value={nameValue}
+              onChangeText={(value) => setNameValue(value)}
+            />
+            <Input
+              label={'XP'}
+              value={desValue}
+              onChangeText={(value) => setDesValue(value)}
+            />
+            <Input
+              label={'Image Url'}
+              value={avtValue}
+              onChangeText={(value) => setDesValue(value)}
+            />
+            <Button
+              title={'Edit'}
+              buttonStyle={{backgroundColor: Colors.ButtonBackground}}
+              onPress={() => {
+                closeForm();
+              }}
+            />
+          </View>
+        </ModalOverlay>
       </View>
     );
   };
+
+  const renderAddForm = () => {
+    return (
+      <ModalOverlay position={'center'} ref={modalAddUser}>
+        <View>
+          <Input
+            label={'Name'}
+            value={''}
+            onChangeText={(value) => setNameValue(value)}
+          />
+          <Input
+            label={'XP'}
+            value={''}
+            onChangeText={(value) => setDesValue(value)}
+          />
+          <Input
+            label={'Image Url'}
+            value={''}
+            onChangeText={(value) => setDesValue(value)}
+          />
+          <Button
+            title={'Edit'}
+            buttonStyle={{backgroundColor: Colors.ButtonBackground}}
+            onPress={() => {
+              closeForm();
+            }}
+          />
+        </View>
+      </ModalOverlay>
+    );
+  };
+
   return (
-    <View>
-      <Header
-        leftComponent={{
-          icon: 'arrow-back',
-          color: Colors.AppColor.backgroundAcient,
-        }}
-        centerComponent={{
-          text: 'Blocked List',
-          style: {
-            color: Colors.AppColor.backgroundAcient,
-            fontSize: 18,
-            fontWeight: 'bold',
-          },
-        }}
-        rightComponent={{
-          icon: 'ios-add-circle-outline',
-          color: Colors.AppColor.backgroundAcient,
-          type: 'ionicon',
-        }}
-        backgroundColor={Colors.AppColor.backgroundPrimary}
+    <View style={{flex: 1}}>
+      <HeaderBlockList
+        title={'Blocked List'}
+        onrightPress={() => addUserForm()}
       />
-      <View style={{paddingVertical: Size.spacing.extraLarge}}>
-        <FlatList
-          data={listUser}
-          renderItem={({item, index}) => renderItem(item, index)}
-        />
-      </View>
+      <FlatList
+        style={{paddingTop: Size.spacing.large}}
+        data={listBlock}
+        renderItem={({item, index}) => renderItem(item, index)}
+      />
+      <View style={{height: 40}}></View>
+      {renderAddForm()}
     </View>
   );
 });

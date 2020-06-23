@@ -27,7 +27,7 @@ export const YouTubeScreen: React.FunctionComponent = React.memo(() => {
   const getData = () => {
     axios({
       method: 'get',
-      url: 'https://5eec5c4b5e298b0016b69a76.mockapi.io/abcsoft/video',
+      url: 'https://9vujm.sse.codesandbox.io/video',
     })
       .then((response: any) => {
         setVideos(response.data);

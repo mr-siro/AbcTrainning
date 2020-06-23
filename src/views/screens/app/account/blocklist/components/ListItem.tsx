@@ -11,7 +11,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {Colors, Size} from '@themes';
-import {User} from './index';
+import {User} from '../index';
 
 interface Props {
   containerStyle?: StyleProp<ViewStyle>;
