@@ -60,5 +60,30 @@ const listUser = [
     xp: '7/10',
   },
 ];
-
-export {listUser};
+const listClient =[
+  {
+    id: 1,
+    avt: 'https://loremflickr.com/320/240',
+    name: 'Wilfred Ferrillo',
+    description: 'Captain',
+  },
+  {
+    id: 2,
+    avt: 'https://loremflickr.com/320/240',
+    name: 'Fabio Carles',
+    description: 'First officer',
+  },
+  {
+    id: 3,
+    avt: 'https://loremflickr.com/320/240',
+    name: 'Tony Stark',
+    description: 'Assistant',
+  },
+  {
+    id: 4,
+    avt: 'https://loremflickr.com/320/240',
+    name: 'Steve Roger',
+    description: 'Assistant',
+  },
+]
+export {listUser,listClient};

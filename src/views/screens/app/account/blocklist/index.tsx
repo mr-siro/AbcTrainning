@@ -8,6 +8,7 @@ import {ItemComponent, ModalOverlay} from '@components';
 import {HeaderBlockList} from './components/Header';
 import {Swipeable} from 'react-native-gesture-handler';
 import {Input, Button} from 'react-native-elements';
+
 export interface User {
   id: number;
   name: string;
@@ -20,14 +21,13 @@ export const BlockList = React.memo(() => {
   const [nameValue, setNameValue] = useState('');
   const [desValue, setDesValue] = useState('');
   const [avtValue, setAvtValue] = useState('');
-  let modalDetail = React.createRef<ModalOverlay>();
+  let modalEditUser = React.createRef<ModalOverlay>();
   let modalAddUser = React.createRef<ModalOverlay>();
 
   //xoa item khoi list
   const unlockItemById = (id: number) => {
     const filteredData = listBlock.filter((item) => item.id !== id);
     setListBlock(filteredData);
-    console.log(filteredData);
   };
 
   const showConfirmPopup = (id: number) => {
@@ -48,20 +48,21 @@ export const BlockList = React.memo(() => {
       {cancelable: false},
     );
   };
+
   //hien thi va sua item
   const EditUserForm = (id: number) => {
     const filteredData = listBlock.find((item) => item.id == id);
     const nameValue = filteredData?.name ?? '';
-    const deValue = filteredData?.xp ?? '';
+    const desValue = filteredData?.xp ?? '';
     const avtValue = filteredData?.avt ?? '';
     setNameValue(nameValue);
-    setDesValue(deValue);
+    setDesValue(desValue);
     setAvtValue(avtValue);
 
-    modalDetail.current?.open();
+    modalEditUser.current?.open();
   };
-  const closeForm = () => {
-    modalDetail.current?.close();
+  const closeEditForm = () => {
+    modalEditUser.current?.close();
   };
   const addUserForm = () => {
     modalAddUser.current?.open();
@@ -69,6 +70,21 @@ export const BlockList = React.memo(() => {
   const closeAddForm = () => {
     modalAddUser.current?.close();
   };
+  const handleEditForm = () => {
+    closeEditForm();
+  };
+
+  // const addForm = ({id, name, avt, xp}: User) => {
+  //   const item = {
+  //     id: Math.random(),
+  //     name: name,
+  //     avt: avt,
+  //     xp: xp,
+  //   };
+  //   listBlock.push(item);
+  //   closeAddForm();
+  // };
+
   const renderLeftAction = (id: number) => (
     <TouchableOpacity
       onPress={() => showConfirmPopup(id)}
@@ -101,29 +117,27 @@ export const BlockList = React.memo(() => {
             onClick={() => EditUserForm(item.id)}
           />
         </Swipeable>
-        <ModalOverlay position={'center'} ref={modalDetail}>
+        <ModalOverlay position={'center'} ref={modalEditUser}>
           <View>
             <Input
+              defaultValue={nameValue}
               label={'Name'}
-              value={nameValue}
               onChangeText={(value) => setNameValue(value)}
             />
             <Input
               label={'XP'}
-              value={desValue}
+              defaultValue={desValue}
               onChangeText={(value) => setDesValue(value)}
             />
             <Input
               label={'Image Url'}
-              value={avtValue}
-              onChangeText={(value) => setDesValue(value)}
+              defaultValue={avtValue}
+              onChangeText={(value) => setAvtValue(value)}
             />
             <Button
               title={'Edit'}
               buttonStyle={{backgroundColor: Colors.ButtonBackground}}
-              onPress={() => {
-                closeForm();
-              }}
+              onPress={() => handleEditForm()}
             />
           </View>
         </ModalOverlay>
@@ -148,13 +162,13 @@ export const BlockList = React.memo(() => {
           <Input
             label={'Image Url'}
             value={''}
-            onChangeText={(value) => setDesValue(value)}
+            onChangeText={(value) => setAvtValue(value)}
           />
           <Button
-            title={'Edit'}
+            title={'Add'}
             buttonStyle={{backgroundColor: Colors.ButtonBackground}}
             onPress={() => {
-              closeForm();
+              closeAddForm();
             }}
           />
         </View>
@@ -168,11 +182,17 @@ export const BlockList = React.memo(() => {
         title={'Blocked List'}
         onrightPress={() => addUserForm()}
       />
-      <FlatList
-        style={{paddingTop: Size.spacing.large}}
-        data={listBlock}
-        renderItem={({item, index}) => renderItem(item, index)}
-      />
+      {listBlock.length == 0 ? (
+        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <Text>{'Bạn chưa chặn ai'}</Text>
+        </View>
+      ) : (
+        <FlatList
+          style={{paddingTop: Size.spacing.large}}
+          data={listBlock}
+          renderItem={({item, index}) => renderItem(item, index)}
+        />
+      )}
       <View style={{height: 40}}></View>
       {renderAddForm()}
     </View>

@@ -11,6 +11,7 @@ import {
   View,
   SafeAreaView,
   StyleSheet,
+  StatusBar,
 } from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -20,12 +21,20 @@ import {
   SignIn,
   SignUp,
   BlockList,
+  CustomComponent,
+  FlightGray,
+  FlightRed
 } from '@screens';
 
 function App() {
   return (
     <SafeAreaProvider>
-      <BlockList />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={'transparent'}
+        translucent={true}
+      />
+      <FlightRed />
     </SafeAreaProvider>
   );
 }
