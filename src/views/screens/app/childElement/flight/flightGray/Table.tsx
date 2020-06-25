@@ -47,7 +47,7 @@ export const Table = React.memo(() => {
     <View style={styles.tableContainer}>
       <View style={styles.tableTop}>
         <TouchableOpacity
-          onPress={() => setTab(!tab)}
+          onPress={() => setTab(true)}
           style={[
             styles.itemTopTable,
             {backgroundColor: tab ? '#E42626' : Colors.White},
@@ -57,7 +57,7 @@ export const Table = React.memo(() => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => setTab(!tab)}
+          onPress={() => setTab(false)}
           style={[
             styles.itemTopTable,
             {backgroundColor: tab ? Colors.White : '#E42626'},

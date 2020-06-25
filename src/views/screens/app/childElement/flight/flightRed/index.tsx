@@ -14,7 +14,7 @@ export interface Plan {
   description: string;
 }
 
-export const FlightRed = () => {
+export const FlightRed = React.memo(() => {
   const renderItem = (item: Plan, index: number) => (
     <ItemComponent
       image={item.avt}
@@ -67,4 +67,4 @@ export const FlightRed = () => {
       </ScrollView>
     </View>
   );
-};
+});
