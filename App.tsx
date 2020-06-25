@@ -34,7 +34,7 @@ function App() {
         backgroundColor={'transparent'}
         translucent={true}
       />
-      <FlightRed />
+      <FlightGray />
     </SafeAreaProvider>
   );
 }

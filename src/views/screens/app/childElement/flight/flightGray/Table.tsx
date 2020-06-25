@@ -1,35 +1,73 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {styles, Diver, Name, Office} from './styles';
 import {Colors} from '@themes';
+import {pilot, attendant} from '@services';
 
-export const Table = () => {
+export const Table = React.memo(() => {
+  const [tab, setTab] = useState(true);
+
+  const renderPilot = () => {
+    return (
+      <View>
+        {pilot.map((item, index) => {
+          return (
+            <View>
+              <View style={styles.itemTable}>
+                <Name>{item.name}</Name>
+                <Diver>-</Diver>
+                <Office>{item.office}</Office>
+              </View>
+            </View>
+          );
+        })}
+      </View>
+    );
+  };
+
+  const renderAttendant = () => {
+    return (
+      <View>
+        {attendant.map((item, index) => {
+          return (
+            <View>
+              <View style={styles.itemTable}>
+                <Name>{item.name}</Name>
+                <Diver>-</Diver>
+                <Office>{item.office}</Office>
+              </View>
+            </View>
+          );
+        })}
+      </View>
+    );
+  };
+
   return (
     <View style={styles.tableContainer}>
       <View style={styles.tableTop}>
-        <View style={[styles.itemTopTable, {backgroundColor: '#E42626'}]}>
-          <Text style={{color: Colors.White, fontSize: 16}}>Pilot</Text>
-        </View>
-        <View style={styles.itemTopTable}>
-          <Text style={{color: '#E42626', fontSize: 16}}>Attendant</Text>
-        </View>
+        <TouchableOpacity
+          onPress={() => setTab(!tab)}
+          style={[
+            styles.itemTopTable,
+            {backgroundColor: tab ? '#E42626' : Colors.White},
+          ]}>
+          <Text style={{color: tab ? Colors.White : '#E42626', fontSize: 16}}>
+            Pilot
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setTab(!tab)}
+          style={[
+            styles.itemTopTable,
+            {backgroundColor: tab ? Colors.White : '#E42626'},
+          ]}>
+          <Text style={{color: tab ? '#E42626' : Colors.White, fontSize: 16}}>
+            Attendant
+          </Text>
+        </TouchableOpacity>
       </View>
-
-      <View style={styles.itemTable}>
-        <Name>Jared Keller</Name>
-        <Diver>-</Diver>
-        <Office>Captain</Office>
-      </View>
-      <View style={styles.itemTable}>
-        <Name>Erik Boyd</Name>
-        <Diver>-</Diver>
-        <Office>First officer</Office>
-      </View>
-      <View style={styles.itemTable}>
-        <Name>Georgie Vargas</Name>
-        <Diver>-</Diver>
-        <Office>Assistant</Office>
-      </View>
+      {tab ? renderPilot() : renderAttendant()}
     </View>
   );
-};
+});

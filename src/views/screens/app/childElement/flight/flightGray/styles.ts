@@ -14,7 +14,12 @@ const styles = StyleSheet.create({
     borderColor: '#E42626',
     borderWidth: 1,
   },
-  tableTop: {flexDirection: 'row', width: '100%'},
+  tableTop: {
+    flexDirection: 'row',
+    width: '100%',
+    borderColor: '#E42626',
+    borderWidth:1
+  },
   itemTopTable: {
     alignItems: 'center',
     width: '50%',
@@ -23,7 +28,7 @@ const styles = StyleSheet.create({
   },
   itemTable: {
     flexDirection: 'row',
-    borderTopWidth: 1,
+    borderWidth: 1,
     borderColor: '#E42626',
     height: 44,
     alignItems: 'center',

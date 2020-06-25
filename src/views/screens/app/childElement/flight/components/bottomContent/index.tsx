@@ -16,6 +16,7 @@ export const BottomContent = (props: Props) => {
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingHorizontal: Size.spacing.huge,
+        alignItems: 'center',
       }}>
       <TouchableOpacity>
         <Image source={Images.ICScroll} />

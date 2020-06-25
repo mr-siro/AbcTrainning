@@ -60,7 +60,7 @@ const listUser = [
     xp: '7/10',
   },
 ];
-const listClient =[
+const listClient = [
   {
     id: 1,
     avt: 'https://loremflickr.com/320/240',
@@ -85,5 +85,28 @@ const listClient =[
     name: 'Steve Roger',
     description: 'Assistant',
   },
-]
-export {listUser,listClient};
+];
+const pilot = [
+  {
+    id: 1,
+    name: 'Jared Keller',
+    office: 'Captain',
+  },
+  {
+    id: 2,
+    name: 'Erik Boyd',
+    office: 'First officer',
+  },
+  {
+    id: 3,
+    name: 'Georgie Vargas',
+    office: 'Assistant',
+  },
+];
+
+const attendant = [
+  {id: 1, name: 'Hawkeye', office: 'Captain'},
+  {id: 2, name: 'Natasa', office: 'First officer'},
+  {id: 3, name: 'War Machine', office: 'Assistant'}
+];
+export {listUser, listClient, pilot, attendant};
