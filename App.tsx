@@ -14,17 +14,7 @@ import {
   StatusBar,
 } from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-
-import {
-  YouTubeScreen,
-  ProfileScreen,
-  SignIn,
-  SignUp,
-  BlockList,
-  CustomComponent,
-  FlightGray,
-  FlightRed
-} from '@screens';
+import {AppNavigator} from '@navigator';
 
 function App() {
   return (
@@ -34,7 +24,7 @@ function App() {
         backgroundColor={'transparent'}
         translucent={true}
       />
-      <FlightGray />
+      <AppNavigator/>
     </SafeAreaProvider>
   );
 }

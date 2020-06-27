@@ -53,7 +53,7 @@ export const YouTubeScreen: React.FunctionComponent = React.memo(() => {
   };
 
   return (
-    <View>
+    <View style={{flex:1}}>
       <Header
         containerStyle={{backgroundColor: Colors.AppColor.backgroundAcient}}
         leftComponent={

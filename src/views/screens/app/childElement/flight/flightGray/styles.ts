@@ -35,15 +35,7 @@ const styles = StyleSheet.create({
   },
 
   bottom: {
-    paddingVertical:
-      (Platform.OS === 'ios' && Dimensions.get('window').height < 800) ||
-      Dimensions.get('window').width < 812
-        ? Size.spacing.huge
-        : 0,
-    marginTop:
-      Dimensions.get('window').height > 800
-        ? Dimensions.get('window').width / 3.5
-        : 0,
+    marginTop: '10%'
   },
 });
 

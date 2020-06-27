@@ -220,7 +220,7 @@ export const ProfileScreen = () => {
 
             <View
               style={{
-                paddingTop: (Dimensions.get('window').width / 2) * 0.6,
+                paddingTop: (Dimensions.get('window').width / 2) * 0.2,
               }}>
               <TouchableOpacity
                 style={styles.btnContainer}

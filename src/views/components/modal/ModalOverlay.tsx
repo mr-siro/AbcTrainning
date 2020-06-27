@@ -9,6 +9,7 @@ export interface Props {
   position: 'center' | 'bottom';
   onCancel?(): void;
   onDone?(): void;
+  actionClose?: () => void;
   modalStyle?: StyleProp<ViewStyle>;
   children?: React.ReactNode;
   [key: string]: any;
@@ -38,6 +39,7 @@ export default class ModalOverlay extends Component<Props, State> {
   close = () => {
     this.setState({visible: false});
   };
+  actionClose = () => {};
 
   onCancel = () => {
     const {onCancel} = this.props;
@@ -56,11 +58,13 @@ export default class ModalOverlay extends Component<Props, State> {
   );
 
   render() {
-    const {position, modalStyle} = this.props;
+    const {position, modalStyle, action} = this.props;
     let myModal = (
-      <Modal
-        onDismiss={this.close}
-        dismissOnTouchOutside={false}
+      <Modal  
+        onDismiss={() => this.actionClose()}
+        dismissOnTouchOutside={() => {
+          this.close();
+        }}
         width={0.9}
         overlayOpacity={0.6}
         visible={this.state.visible}

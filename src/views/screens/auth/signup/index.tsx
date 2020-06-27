@@ -18,7 +18,14 @@ import {
 import {Images} from '@assets';
 import {styles} from './styles';
 
-export const SignUp = () => {
+import {ParamListBase} from '@react-navigation/native';
+import {NativeStackNavigationProp} from 'react-native-screens/native-stack/types';
+import { AppRoute } from '@navigator';
+export interface SignUpProps {
+  navigation: NativeStackNavigationProp<ParamListBase>;
+}
+
+export const SignUp:React.FunctionComponent<SignUpProps>  = (props: SignUpProps) => {
   const [userName, setUserName] = useState('');
   const [flag, setFlag] = useState('');
   const [passWord, setPassWord] = useState('');
@@ -28,6 +35,7 @@ export const SignUp = () => {
   const flagRef = createRef<TextInput>();
   const passWordRef = createRef<TextInput>();
   const rePassWordRef = createRef<TextInput>();
+const {navigation} = props;
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -123,7 +131,7 @@ export const SignUp = () => {
           </View>
           <View
             style={{paddingTop: (Dimensions.get('window').width / 2) * 0.2}}>
-            <Text style={styles.dontAccText} onPress={() => {}}>
+            <Text style={styles.dontAccText} onPress={() => navigation.goBack()}>
               {'Back to Sign in'}
             </Text>
           </View>

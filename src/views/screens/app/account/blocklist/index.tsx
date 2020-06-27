@@ -1,16 +1,25 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, FlatList, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  Alert,
+  Dimensions,
+  Platform,
+} from 'react-native';
 
 import {Colors, Size} from '@themes';
 import {listUser} from '@services';
 
-import {ItemComponent, ModalOverlay} from '@components';
+import {ItemComponent} from '@components';
 import {HeaderBlockList} from './components/Header';
 import {Swipeable} from 'react-native-gesture-handler';
 import {Input, Button} from 'react-native-elements';
+import Modal from 'react-native-modal';
 
 export interface User {
-  id: number;
+  id: string;
   name: string;
   avt: string;
   xp: string;
@@ -18,19 +27,20 @@ export interface User {
 
 export const BlockList = React.memo(() => {
   const [listBlock, setListBlock] = useState(listUser);
-  const [nameValue, setNameValue] = useState('');
-  const [desValue, setDesValue] = useState('');
-  const [avtValue, setAvtValue] = useState('');
-  let modalEditUser = React.createRef<ModalOverlay>();
-  let modalAddUser = React.createRef<ModalOverlay>();
+  const [formName, setFormName] = useState('');
+  const [formXp, setformXp] = useState('');
+  const [formAvt, setFormAvt] = useState('');
+  const [formId, setFormId] = useState('');
+  const [isModalVisible, setModalVisible] = useState(false);
 
   //xoa item khoi list
-  const unlockItemById = (id: number) => {
+  const unlockItemById = (id: string) => {
     const filteredData = listBlock.filter((item) => item.id !== id);
+    // console.log('Deleted:', id);
     setListBlock(filteredData);
   };
 
-  const showConfirmPopup = (id: number) => {
+  const showConfirmPopup = (id: string) => {
     Alert.alert(
       'Bạn muốn bỏ chặn người này?',
       'Cần 24 giờ để hoàn tác',
@@ -48,44 +58,58 @@ export const BlockList = React.memo(() => {
       {cancelable: false},
     );
   };
+  const resetForm = () => {
+    console.log('abc');
+    setFormName('');
+    setFormId('');
+    setformXp('');
+    setFormAvt('');
+  };
+  const toggleForm = () => {
+    resetForm();
+    setModalVisible(!isModalVisible);
+  };
 
-  //hien thi va sua item
-  const EditUserForm = (id: number) => {
+  const EditUserForm = (id: string) => {
     const filteredData = listBlock.find((item) => item.id == id);
-    const nameValue = filteredData?.name ?? '';
-    const desValue = filteredData?.xp ?? '';
-    const avtValue = filteredData?.avt ?? '';
-    setNameValue(nameValue);
-    setDesValue(desValue);
-    setAvtValue(avtValue);
+    if (filteredData) {
+      setFormName(filteredData.name);
+      setFormAvt(filteredData.avt);
+      setformXp(filteredData.xp);
+      setFormId(filteredData.id.toString());
+      setModalVisible(!isModalVisible);
+    }
+  };
 
-    modalEditUser.current?.open();
+  // add item
+  const handleAddForm = () => {
+    let item = {
+      id: Math.random().toString(),
+      name: formName,
+      avt: formAvt,
+      xp: formXp,
+    };
+    let addList = listBlock.concat(item);
+    setListBlock(addList);
+    toggleForm();
   };
-  const closeEditForm = () => {
-    modalEditUser.current?.close();
-  };
-  const addUserForm = () => {
-    modalAddUser.current?.open();
-  };
-  const closeAddForm = () => {
-    modalAddUser.current?.close();
-  };
+
   const handleEditForm = () => {
-    closeEditForm();
+    const mapListBlock = [...listBlock];
+    const edittedItem = listBlock.find((item: User) => item.id === formId);
+    const indexOf = edittedItem ? listBlock.indexOf(edittedItem) : -1;
+    if (edittedItem && indexOf !== -1) {
+      console.log('edittedItem', edittedItem);
+      edittedItem.avt = formAvt;
+      edittedItem.name = formName;
+      edittedItem.xp = formXp;
+      mapListBlock[indexOf] = edittedItem;
+      setListBlock(mapListBlock);
+    }
+    setModalVisible(!isModalVisible);
   };
 
-  // const addForm = ({id, name, avt, xp}: User) => {
-  //   const item = {
-  //     id: Math.random(),
-  //     name: name,
-  //     avt: avt,
-  //     xp: xp,
-  //   };
-  //   listBlock.push(item);
-  //   closeAddForm();
-  // };
-
-  const renderLeftAction = (id: number) => (
+  const renderLeftAction = (id: string) => (
     <TouchableOpacity
       onPress={() => showConfirmPopup(id)}
       style={{
@@ -106,7 +130,7 @@ export const BlockList = React.memo(() => {
 
   const renderItem = (item: User, index: number) => {
     return (
-      <View>
+      <View style={{flex:1}}>
         <Swipeable
           renderLeftActions={() => renderLeftAction(item.id)}
           onSwipeableLeftOpen={() => {}}>
@@ -117,62 +141,42 @@ export const BlockList = React.memo(() => {
             onClick={() => EditUserForm(item.id)}
           />
         </Swipeable>
-        <ModalOverlay position={'center'} ref={modalEditUser}>
-          <View>
-            <Input
-              defaultValue={nameValue}
-              label={'Name'}
-              onChangeText={(value) => setNameValue(value)}
-            />
-            <Input
-              label={'XP'}
-              defaultValue={desValue}
-              onChangeText={(value) => setDesValue(value)}
-            />
-            <Input
-              label={'Image Url'}
-              defaultValue={avtValue}
-              onChangeText={(value) => setAvtValue(value)}
-            />
-            <Button
-              title={'Edit'}
-              buttonStyle={{backgroundColor: Colors.ButtonBackground}}
-              onPress={() => handleEditForm()}
-            />
-          </View>
-        </ModalOverlay>
       </View>
     );
   };
 
-  const renderAddForm = () => {
+  const renderForm = () => {
     return (
-      <ModalOverlay position={'center'} ref={modalAddUser}>
-        <View>
+      <Modal isVisible={isModalVisible} onBackdropPress={() => toggleForm()}>
+        <View
+          style={{
+            padding: Size.spacing.large,
+            backgroundColor: Colors.White,
+            borderRadius: 10,
+            justifyContent: 'center',
+          }}>
           <Input
             label={'Name'}
-            value={''}
-            onChangeText={(value) => setNameValue(value)}
+            value={formName}
+            onChangeText={(value) => setFormName(value)}
           />
           <Input
             label={'XP'}
-            value={''}
-            onChangeText={(value) => setDesValue(value)}
+            value={formXp}
+            onChangeText={(value) => setformXp(value)}
           />
           <Input
             label={'Image Url'}
-            value={''}
-            onChangeText={(value) => setAvtValue(value)}
+            value={formAvt}
+            onChangeText={(value) => setFormAvt(value)}
           />
           <Button
-            title={'Add'}
+            title={formId ? 'Edit' : 'Add'}
             buttonStyle={{backgroundColor: Colors.ButtonBackground}}
-            onPress={() => {
-              closeAddForm();
-            }}
+            onPress={formId ? () => handleEditForm() : () => handleAddForm()}
           />
         </View>
-      </ModalOverlay>
+      </Modal>
     );
   };
 
@@ -180,7 +184,7 @@ export const BlockList = React.memo(() => {
     <View style={{flex: 1}}>
       <HeaderBlockList
         title={'Blocked List'}
-        onrightPress={() => addUserForm()}
+        onrightPress={() => toggleForm()}
       />
       {listBlock.length == 0 ? (
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -188,13 +192,11 @@ export const BlockList = React.memo(() => {
         </View>
       ) : (
         <FlatList
-          style={{paddingTop: Size.spacing.large}}
           data={listBlock}
           renderItem={({item, index}) => renderItem(item, index)}
         />
       )}
-      <View style={{height: 40}}></View>
-      {renderAddForm()}
+      {renderForm()}
     </View>
   );
 });

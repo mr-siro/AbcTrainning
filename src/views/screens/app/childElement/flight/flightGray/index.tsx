@@ -9,8 +9,19 @@ import {
 } from '../components';
 import {styles} from './styles';
 import {Table} from './Table';
+import {ParamListBase} from '@react-navigation/native';
+import {NativeStackNavigationProp} from 'react-native-screens/native-stack/types';
+import {AppRoute} from '@navigator';
 
-export const FlightGray = () => {
+export interface FlightGrayProps {
+  navigation: NativeStackNavigationProp<ParamListBase>;
+}
+
+export const FlightGray: React.FunctionComponent<FlightGrayProps> = (
+  props: FlightGrayProps,
+) => {
+  const {navigation} = props;
+
   return (
     <View style={{flex: 1}}>
       <HeaderComponent
@@ -20,6 +31,7 @@ export const FlightGray = () => {
         nameRight={'sfo'}
         descriptionLeft={'New York'}
         descriptionRight={'San Franciso'}
+        onLeftPress={() => navigation.navigate(AppRoute.MyTabs)}
       />
       <ScrollView>
         <View style={styles.container}>
@@ -29,7 +41,6 @@ export const FlightGray = () => {
               {'PSA-JF5690-SFO'}
             </Text>
           </View>
-
           <TopContent
             isBorderTop={true}
             topTitle={'Schedule'}

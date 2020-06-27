@@ -5,7 +5,7 @@ import {Colors} from '@themes';
 import {pilot, attendant} from '@services';
 
 export const Table = React.memo(() => {
-  const [tab, setTab] = useState(true);
+  const [isPilot, setIsPilot] = useState(true);
 
   const renderPilot = () => {
     return (
@@ -47,27 +47,27 @@ export const Table = React.memo(() => {
     <View style={styles.tableContainer}>
       <View style={styles.tableTop}>
         <TouchableOpacity
-          onPress={() => setTab(true)}
+          onPress={() => setIsPilot(true)}
           style={[
             styles.itemTopTable,
-            {backgroundColor: tab ? '#E42626' : Colors.White},
+            {backgroundColor: isPilot ? '#E42626' : Colors.White},
           ]}>
-          <Text style={{color: tab ? Colors.White : '#E42626', fontSize: 16}}>
+          <Text style={{color: isPilot ? Colors.White : '#E42626', fontSize: 16}}>
             Pilot
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => setTab(false)}
+          onPress={() => setIsPilot(false)}
           style={[
             styles.itemTopTable,
-            {backgroundColor: tab ? Colors.White : '#E42626'},
+            {backgroundColor: isPilot ? Colors.White : '#E42626'},
           ]}>
-          <Text style={{color: tab ? '#E42626' : Colors.White, fontSize: 16}}>
+          <Text style={{color: isPilot ? '#E42626' : Colors.White, fontSize: 16}}>
             Attendant
           </Text>
         </TouchableOpacity>
       </View>
-      {tab ? renderPilot() : renderAttendant()}
+      {isPilot ? renderPilot() : renderAttendant()}
     </View>
   );
 });

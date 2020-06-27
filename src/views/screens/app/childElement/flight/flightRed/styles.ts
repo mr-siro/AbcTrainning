@@ -43,4 +43,8 @@ const CrewText = styled.Text`
   fontSize: 16px;
 `;
 
-export {styles,CrewText};
+const Code = styled.Text`
+  fontSize: 16px;
+  fontWeight: 500;
+`;
+export {styles,CrewText,Code};

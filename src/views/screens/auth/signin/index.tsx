@@ -14,16 +14,24 @@ import {
   ScrollView,
   Dimensions,
 } from 'react-native';
+import {ParamListBase} from '@react-navigation/native';
+import {NativeStackNavigationProp} from 'react-native-screens/native-stack/types';
+import { AppRoute } from '@navigator';
 
 import {Images} from '@assets';
 import {styles} from './styles';
 
-export const SignIn = () => {
+export interface SignInProps {
+  navigation: NativeStackNavigationProp<ParamListBase>;
+}
+
+export const SignIn: React.FunctionComponent<SignInProps> = (props: SignInProps) => {
   const [userName, setUserName] = useState('');
   const [passWord, setPassWord] = useState('');
 
   const userNameRef = createRef<TextInput>();
   const passWordRef = createRef<TextInput>();
+  const {navigation} = props
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -81,7 +89,7 @@ export const SignIn = () => {
                   Forget your password?
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonSubmit}>
+              <TouchableOpacity style={styles.buttonSubmit} onPress={() => navigation.navigate(AppRoute.MyTabs)}>
                 <Text
                   style={{color: '#ffffff', fontSize: 18, fontWeight: 'bold'}}>
                   Sign in
@@ -93,7 +101,7 @@ export const SignIn = () => {
           <View>
             <View style={styles.bottomText}>
               <Text style={styles.dontAccText}>Don’t have an account?</Text>
-              <Text style={styles.signUpText} onPress={() => {}}>
+              <Text style={styles.signUpText} onPress={() => navigation.navigate(AppRoute.SIGNUP)}>
                 Sign up
               </Text>
             </View>

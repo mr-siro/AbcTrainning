@@ -1,11 +1,13 @@
 import React, {useRef, useState, useEffect} from 'react';
-import {Text, View, StyleSheet, Animated} from 'react-native';
+import {Text, View} from 'react-native';
 
 export interface Props {
   value: number;
 }
+
 export const ProgressBar = (props: Props) => {
   const {value} = props;
+
   return (
     <View style={{borderRadius: 10, borderWidth: 1, borderColor: '#252357'}}>
       <View

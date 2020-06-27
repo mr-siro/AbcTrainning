@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {View, Text, ScrollView, FlatList} from 'react-native';
 import {Size} from '@themes';
 import {HeaderComponent, TopContent, CenterContent} from '../components';
 import {ItemComponent} from '@components';
 import {listClient} from '@services';
 
-import {styles, CrewText} from './styles';
+import {styles, CrewText, Code} from './styles';
+import {ParamListBase} from '@react-navigation/native';
+import {NativeStackNavigationProp} from 'react-native-screens/native-stack/types';
+import {AppRoute} from '@navigator';
 
 export interface Plan {
   id: number;
@@ -14,7 +17,13 @@ export interface Plan {
   description: string;
 }
 
-export const FlightRed = React.memo(() => {
+export interface FlightRedProps {
+  navigation: NativeStackNavigationProp<ParamListBase>;
+}
+
+export const FlightRed: React.FunctionComponent<FlightRedProps> = (
+  props: FlightRedProps,
+) => {
   const renderItem = (item: Plan, index: number) => (
     <ItemComponent
       image={item.avt}
@@ -23,6 +32,7 @@ export const FlightRed = React.memo(() => {
       style={{backgroundColor: '#F1F1F1'}}
     />
   );
+  const {navigation} = props;
 
   return (
     <View style={{flex: 1, backgroundColor: '#F1F1F1'}}>
@@ -33,10 +43,10 @@ export const FlightRed = React.memo(() => {
         nameRight={'sfo'}
         descriptionLeft={'New York'}
         descriptionRight={'San Franciso'}
+        onLeftPress={() => navigation.navigate(AppRoute.MyTabs)}
       />
-      <View
-        style={styles.code}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>PSA-JF5690-SFO</Text>
+      <View style={styles.code}>
+        <Code>PSA-JF5690-SFO</Code>
       </View>
       <ScrollView>
         <View style={styles.container}>
@@ -48,23 +58,21 @@ export const FlightRed = React.memo(() => {
             contentStyle={{paddingHorizontal: Size.spacing.huge}}
           />
         </View>
-        <CenterContent leftTitle={'Gate'} rightTitle={'A2'}></CenterContent>
-        <View
-          style={styles.crew}>
-          <CrewText>
-            {'Crew on the flight'}
-          </CrewText>
+        <CenterContent
+          leftTitle={'Gate'}
+          rightTitle={'A2'}
+          containerStyle={{paddingTop: Size.spacing.huge}}></CenterContent>
+        <View style={styles.crew}>
+          <CrewText>{'Crew on the flight'}</CrewText>
           <Text style={{fontSize: 16, fontWeight: '500'}}>25</Text>
         </View>
-
         <FlatList
           data={listClient}
           renderItem={({item, index}) => renderItem(item, index)}
           showsVerticalScrollIndicator={false}
           style={{paddingTop: 20}}
         />
-        <View style={{height: 40}}></View>
       </ScrollView>
     </View>
   );
-});
+};

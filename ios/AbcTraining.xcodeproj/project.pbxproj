@@ -40,6 +40,7 @@
 		E6DF642877FE477298B5641D /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D089E0DCC147496D9B97BA10 /* Feather.ttf */; };
 		EF96AD931C634A0DB9D56295 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3071415772B1470E98CE9FC0 /* Roboto-Regular.ttf */; };
 		F2D81BC787C84442BFD64757 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 071AA964F33E4443AFAA0F81 /* Octicons.ttf */; };
+		3D5C89CC536947E48947A329 /* Baskerville-SemiBold.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 62109C9903F74C2BB5D9FF6F /* Baskerville-SemiBold.ttc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 		EF92802100D94A5E8B672F57 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		EFC78DED0A4E4A74A6A7C900 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		FCD1E52CA41A709FE52AE155 /* Pods-AbcTraining-AbcTrainingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AbcTraining-AbcTrainingTests.debug.xcconfig"; path = "Target Support Files/Pods-AbcTraining-AbcTrainingTests/Pods-AbcTraining-AbcTrainingTests.debug.xcconfig"; sourceTree = "<group>"; };
+		62109C9903F74C2BB5D9FF6F /* Baskerville-SemiBold.ttc */ = {isa = PBXFileReference; name = "Baskerville-SemiBold.ttc"; path = "../src/assets/fonts/Baskerville-SemiBold.ttc"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +264,7 @@
 				071AA964F33E4443AFAA0F81 /* Octicons.ttf */,
 				896F706F41D045638CEDE083 /* SimpleLineIcons.ttf */,
 				E18CCC4BC913435C8067EC14 /* Zocial.ttf */,
+				62109C9903F74C2BB5D9FF6F /* Baskerville-SemiBold.ttc */,
 			);
 			name = Resources;
 			path = "";
@@ -431,6 +434,7 @@
 				F2D81BC787C84442BFD64757 /* Octicons.ttf in Resources */,
 				ABC1348C8A244F9CA5F7C736 /* SimpleLineIcons.ttf in Resources */,
 				9618D8296DE24D34921E3BC8 /* Zocial.ttf in Resources */,
+				3D5C89CC536947E48947A329 /* Baskerville-SemiBold.ttc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
