@@ -33,7 +33,8 @@
 # install adb on mac
 
 brew cask install android-platform-tools
-
+# install Cocapod
+sudo gem install cocoapods
 # build ios
 
 cd ios && pod install
