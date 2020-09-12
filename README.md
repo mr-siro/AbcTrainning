@@ -1,5 +1,7 @@
 # setting evironment start react-native
 
+#  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
 # brew install yarn
 
 # brew install node
