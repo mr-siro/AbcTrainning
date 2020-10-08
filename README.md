@@ -55,3 +55,8 @@ rm -rf /ios/build and rm -rf ~/Library/Developer/Xcode/DerivedData
 # clean build android
 
 cd android => ./gradlew clean
+
+# setting vector icon ios
+add line: pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+under line:   use_react_native!(:path => config["reactNativePath"]) in podfile
+package.json:add in script:  "postinstall": "sed -i '' '/s.resources/d' ./node_modules/react-native-vector-icons/RNVectorIcons.podspec && npx jetify"
