@@ -10,7 +10,7 @@
 
 # brew tap AdoptOpenJDK/openjdk
 
-# brew cask install adoptopenjdk8
+# brew install homebrew/cask-versions/adoptopenjdk8
 
 # npm install -g react-native-cli
 
@@ -34,7 +34,8 @@
 
 # install adb on mac
 
-brew cask install android-platform-tools
+ brew install android-platform-tools
+
 # install Cocapod
 sudo gem install cocoapods
 # build ios
